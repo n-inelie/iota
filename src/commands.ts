@@ -12,6 +12,16 @@ const commands = [
             type: ApplicationCommandOptionType.String,
             required: true,
         }],
+    },
+    {
+        name: 'briefrepo',
+        description: 'Gets a brief description of the given github repo',
+        options: [{
+            name: 'repoaddr',
+            description: 'format: {owner}/{repo}',
+            type: ApplicationCommandOptionType.String,
+            required: true,
+        }],
     }
 ];
 
@@ -22,7 +32,7 @@ if (!Token) {
 const rest = new REST().setToken(Token);
 const registerCommands = async () => {
     try {
-        if(!Client_ID || !Guild_ID) {
+        if (!Client_ID || !Guild_ID) {
             process.exit(1);
         }
         await rest.put(
@@ -31,7 +41,7 @@ const registerCommands = async () => {
         );
         console.log("Slash commands were registered successfully");
     } catch (error) {
-        console.error(`(ERROR) --| ${error} |--`);
+        console.error(`(ERROR): ${error}`);
         process.exit(1);
     }
 };
